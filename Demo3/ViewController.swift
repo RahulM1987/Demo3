@@ -65,15 +65,20 @@ class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSour
     }
     
     func httprequest() {
-        MakeHttpRequest.sharedInstance.dataRequest { ( data ) in
-            self.datasource = data
-            DispatchQueue.main.async {
-                self.title = self.datasource?.title
-                self.tableView.reloadData()
-                self.tableView.setNeedsLayout()
-                self.tableView.layoutIfNeeded()
-                self.tableView.reloadData()
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+                MakeHttpRequest.sharedInstance.dataRequest { ( data ) in
+                self.datasource = data
+                DispatchQueue.main.async {
+                    self.title = self.datasource?.title
+                    self.tableView.reloadData()
+                    self.tableView.setNeedsLayout()
+                    self.tableView.layoutIfNeeded()
+                    self.tableView.reloadData()
+                }
             }
+        }else{
+            print("Internet Connection not Available!")
         }
     }
     
