@@ -18,6 +18,7 @@
 		B7DACCA525275DCB00E1430C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7DACCA325275DCB00E1430C /* LaunchScreen.storyboard */; };
 		B7DACCB025275DCB00E1430C /* Demo3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DACCAF25275DCB00E1430C /* Demo3Tests.swift */; };
 		B7DACCBB25275DCB00E1430C /* Demo3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DACCBA25275DCB00E1430C /* Demo3UITests.swift */; };
+		B7E5F881252B25E400CF7AB5 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5F880252B25E400CF7AB5 /* Reachability.swift */; };
 		B7FAE5E625284C7D00B68939 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FAE5E525284C7D00B68939 /* TableViewCell.swift */; };
 		BB278D958F91A8A6331CDF4B /* Pods_Demo3_Demo3UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0684167CE0012C57CC32203 /* Pods_Demo3_Demo3UITests.framework */; };
 		F708DD59676D5976DE850416 /* Pods_Demo3Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7F7BAB65A602E564DDCD5B /* Pods_Demo3Tests.framework */; };
@@ -62,6 +63,7 @@
 		B7DACCB625275DCB00E1430C /* Demo3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Demo3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7DACCBA25275DCB00E1430C /* Demo3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo3UITests.swift; sourceTree = "<group>"; };
 		B7DACCBC25275DCB00E1430C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7E5F880252B25E400CF7AB5 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		B7FAE5E525284C7D00B68939 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C0684167CE0012C57CC32203 /* Pods_Demo3_Demo3UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo3_Demo3UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE156C3B7E91C6E0A739E4B2 /* Pods-Demo3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo3.release.xcconfig"; path = "Target Support Files/Pods-Demo3/Pods-Demo3.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				B7DACC9825275DC900E1430C /* AppDelegate.swift */,
 				B7DACC9C25275DC900E1430C /* ViewController.swift */,
+				B7E5F880252B25E400CF7AB5 /* Reachability.swift */,
 				B7FAE5E525284C7D00B68939 /* TableViewCell.swift */,
 				B7076BD325299B3C00737ED4 /* APIManager.swift */,
 				B796977B25279C2A00217F80 /* MappingModel.swift */,
@@ -416,6 +419,7 @@
 			files = (
 				B7DACC9D25275DC900E1430C /* ViewController.swift in Sources */,
 				B7FAE5E625284C7D00B68939 /* TableViewCell.swift in Sources */,
+				B7E5F881252B25E400CF7AB5 /* Reachability.swift in Sources */,
 				B7076BD425299B3C00737ED4 /* APIManager.swift in Sources */,
 				B796977C25279C2A00217F80 /* MappingModel.swift in Sources */,
 				B7DACC9925275DC900E1430C /* AppDelegate.swift in Sources */,
@@ -589,6 +593,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Demo3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -608,6 +613,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Demo3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

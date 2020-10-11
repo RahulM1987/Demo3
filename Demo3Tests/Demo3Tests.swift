@@ -3,6 +3,8 @@ import XCTest
 @testable import Demo3
 
 class Demo3Tests: XCTestCase {
+    
+    var jsondata: RootClass?
 
     func testGettingJSON() {
         let expect = expectation(description: "JSON data not nil")
@@ -42,17 +44,77 @@ class Demo3Tests: XCTestCase {
     
     func testJSONMapping() throws {
         let bundle = Bundle(for: Demo3Tests.self)
-            guard let url = bundle.url(forResource: "mockdata", withExtension: "json") else {
-                XCTFail("Missing file:mockdata.json")
-                return
-            }
-            let jsondata = try Data(contentsOf: url)
-           let json = try JSONSerialization.jsonObject(with: jsondata, options: []) as! [String: Any]
-            if let title = json["title"] as? String {
-            XCTAssertEqual(title, "About Canada")
-            }
-            
+        guard let url = bundle.url(forResource: "mockdata", withExtension: "json") else {
+            XCTFail("Missing file:mockdata.json")
+            return
         }
+        let jsondata = try Data(contentsOf: url)
+        let json = try JSONSerialization.jsonObject(with: jsondata, options: []) as! [String: Any]
+        if let title = json["title"] as? String {
+            XCTAssertEqual(title, "About Canada")
+        }
+                
+    }
+    
+    //Phase 2
+    func checkForNilDescription() throws {
+        let bundle = Bundle(for: Demo3Tests.self)
+        guard let url = bundle.url(forResource: "mockdata", withExtension: "json") else {
+            XCTFail("Missing file:mockdata.json")
+            return
+        }
+        let jsondata = try Data(contentsOf: url)
+        if let value = String(data: jsondata, encoding: String.Encoding.ascii) {
+            if let jsonData = value.data(using: String.Encoding.utf8) {
+                
+                do {
+                    let flash = try! JSONDecoder().decode(RootClass.self, from: jsonData)
+                    self.jsondata = flash
+                    XCTAssertNil(self.jsondata!.rows?[1].description!)
+                }
+            }
+        }
+    }
+    
+    func checkForNilimageURL() throws {
+        let bundle = Bundle(for: Demo3Tests.self)
+        guard let url = bundle.url(forResource: "mockdata", withExtension: "json") else {
+            XCTFail("Missing file:mockdata.json")
+            return
+        }
+        let jsondata = try Data(contentsOf: url)
+        if let value = String(data: jsondata, encoding: String.Encoding.ascii) {
+            if let jsonData = value.data(using: String.Encoding.utf8) {
+                
+                do {
+                    let flash = try! JSONDecoder().decode(RootClass.self, from: jsonData)
+                    self.jsondata = flash
+                    XCTAssertNil(self.jsondata!.rows?[4].imageHref!)
+                }
+            }
+        }
+    }
+    
+    func checkForNilIndex() throws {
+        let bundle = Bundle(for: Demo3Tests.self)
+        guard let url = bundle.url(forResource: "mockdata", withExtension: "json") else {
+            XCTFail("Missing file:mockdata.json")
+            return
+        }
+        let jsondata = try Data(contentsOf: url)
+        if let value = String(data: jsondata, encoding: String.Encoding.ascii) {
+            if let jsonData = value.data(using: String.Encoding.utf8) {
+                
+                do {
+                    let flash = try! JSONDecoder().decode(RootClass.self, from: jsonData)
+                    self.jsondata = flash
+                    XCTAssertNil(self.jsondata!.rows?[7])
+                }
+            }
+        }
+    }
+    
+    
 }
 
 

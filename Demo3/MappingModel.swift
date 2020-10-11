@@ -3,8 +3,7 @@
 struct RootClass : Codable {
     let title : String?
     var rows : [Rows]?
-    
-    
+    let error : String?
 }
 
 struct Rows : Codable {

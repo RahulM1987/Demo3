@@ -5,7 +5,6 @@ target 'Demo3' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'AlamofireImage'
   pod 'SVProgressHUD'
   # Pods for Demo3
 

@@ -1,7 +1,6 @@
 
 
 import UIKit
-import AlamofireImage
 
 class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSource {
     
@@ -13,13 +12,13 @@ class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSour
         table.delegate = self
         return table
     }()
+    var refreshControl = UIRefreshControl() // Phase 2
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Main"
         self.view.backgroundColor = UIColor.lightGray
-        let refreshButtonItem = UIBarButtonItem(title: "Refresh", style: .done, target: self, action: #selector(refresh))
-        self.navigationItem.rightBarButtonItem  = refreshButtonItem
         self.httprequest()
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +28,19 @@ class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSour
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         self.tableView.estimatedRowHeight = 150.0
         self.tableView.rowHeight = UITableView.automaticDimension
+       
+        //Phase 2
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+           refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+           tableView.addSubview(refreshControl)
+        //
+    }
+    
+    //Phase 2
+    @objc func refresh(_ sender: AnyObject) {
+        self.httprequest()
+        refreshControl.endRefreshing()
+        self.tableView.setContentOffset(.zero, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,18 +58,18 @@ class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSour
             cell.descript.numberOfLines = 0
             cell.descript.sizeToFit()
             cell.setupViews(height: cell.descript.frame.height)
-           
-            if let imageURL = URL(string: "\(datasource?.rows?[indexPath.row].imageHref ?? "")"), let placeholder = UIImage(named: "no-image-available") {
-                cell.imageview.af.setImage(withURL: imageURL, placeholderImage: placeholder)
+            if let imageURL = URL(string: "\(datasource?.rows?[indexPath.row].imageHref ?? "")") {
+                cell.downloadImageFromURL(url: imageURL)
             } else {
-//                print("no url, it was nil at \([indexPath.row])")
+                cell.imageview.image = #imageLiteral(resourceName: "no-image-available")
             }
+//        }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Value: \(String(describing: datasource?.rows?[indexPath.row]))")
+        print("Value: \(String(describing: datasource?.rows?[indexPath.row].title))")
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -76,15 +88,12 @@ class ViewController: UIViewController ,UITableViewDelegate, UITableViewDataSour
                     self.tableView.layoutIfNeeded()
                     self.tableView.reloadData()
                 }
-            }
+                }
         }else{
             print("Internet Connection not Available!")
+            MakeHttpRequest.sharedInstance.showAlertMessage(vc: self, titleS: "Demo", messageS: "Please check internet connection and try again.")
         }
     }
     
-    @objc func refresh() {
-        self.httprequest()
-        self.tableView.setContentOffset(.zero, animated: true)
-    }
-        
+    
 }
